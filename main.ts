@@ -12,7 +12,7 @@ function set_Reg(command: number) {
     let buf = pins.createBuffer(2);
     // basic.pause(10)
     // basic.pause(10)
-    buf[0] = command >> 8
+    buf[0] = command >> 16
     buf[1] = command
     return pins.i2cWriteBuffer(SHT31_DEFAULT_ADDR, buf)
 }
@@ -63,10 +63,11 @@ export function LUX(): number {
     basic.pause(1000);
     set_Reg(CH0_ACCES_UP);
     let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
-    //ch01 = 1 << 8
+    let result_1 = ch01[0] << 8;
+    result_1 |= ch01[1];
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
-    return result
+    return result_1
 }
 
 }
