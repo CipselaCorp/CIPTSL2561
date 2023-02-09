@@ -42,8 +42,10 @@ namespace CIPLUX {
     //% blockId="CIPLUXINIT"
     //% block="init"
 export function init() {
-        set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
-        basic.pause(10)
+    set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
+    let bf = pins.i2cReadBuffer(TSL2561_I2C_ADRESS , NumberFormat.UInt16LE)
+    let result_1 = bf[0] << 8;
+    result_1 |= bf[1];
         
     }
 
@@ -56,15 +58,15 @@ export function LUX(): number {
     set_Reg_num(INTERRUP_REG, 0x10);
     //basic.pause(10);
     set_Reg(CH0_ACCES_LOW);
-    let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
+    let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
     let result = ch00[0] << 8;
     result |= ch00[1];
     //ch00 = ch00*(1 << 8)
     
-    set_Reg_num(INTERRUP_REG, 0x10);
+    //set_Reg_num(INTERRUP_REG, 0x10);
     //basic.pause(1000);
     set_Reg(CH0_ACCES_UP);
-    let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
+    let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
     let result_1 = ch01[0] << 8;
     result_1 |= ch01[1];
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
