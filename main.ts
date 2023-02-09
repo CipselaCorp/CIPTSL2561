@@ -55,7 +55,7 @@ export function LUX(): number {
     basic.pause(10);
     set_Reg(CH0_ACCES_LOW);
     let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
-    let result = ch00[0] << 16;
+    let result = ch00[0] << 8;
     result |= ch00[1];
     //ch00 = ch00*(1 << 8)
 
