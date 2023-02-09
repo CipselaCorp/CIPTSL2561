@@ -31,13 +31,14 @@ function set_Reg(command: number): number {
 
 //% color=#9C36B5 weight=25 icon="\uf005" block="CIPLUX2560"
 namespace CIPLUX {
+    init()
     /**
             * Returns a number describing the LUX intensity
         */
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    init()
+    
     //set_Reg_num(GAIN_ACCES, 0x11);
     basic.pause(10)
     setReg(CH0_ACCES_LOW);
@@ -54,7 +55,7 @@ export function LUX(): number {
     basic.pause(100)
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     lux = 256*(result_1 + result_2)
-    return lux
+    return result_1
 }
 
 }
