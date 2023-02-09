@@ -52,8 +52,8 @@ export function init() {
                 * Returns a number describing the LUX intensity
             */
     //% blockId="CIPLUXint"
-    //% block="int"
-export function int() {
+    //% block="interrup"
+export function interrup() {
     let t = getReg(INTERRUP_REG)
     t &= 0x10
     set_Reg_num(INTERRUP_REG, t);
@@ -66,7 +66,7 @@ export function int() {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    set_Reg_num(INTERRUP_REG, 0x10);
+    //set_Reg_num(INTERRUP_REG, 0x10);
     //basic.pause(10);
     set_Reg(0x82);
     let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
@@ -76,13 +76,13 @@ export function LUX(): number {
     basic.pause(50)
     //set_Reg_num(INTERRUP_REG, 0x10);
     //basic.pause(1000);
-    set_Reg(0x83);
-    let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
-    let result_1 = ch01[0] << 8;
-    result_1 |= ch01[1];
+    //set_Reg(0x83);
+    //let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
+    //let result_1 = ch01[0] << 8;
+    //result_1 |= ch01[1];
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
-    return result_1 + result
+    return result
 }
 
 }
