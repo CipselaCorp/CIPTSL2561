@@ -54,7 +54,7 @@ export function init() {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    //set_Reg_num(INTERRUP_REG, 0x10);
+    set_Reg_num(INTERRUP_REG, 0x10);
     //basic.pause(10);
     set_Reg(CH0_ACCES_LOW);
     let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
