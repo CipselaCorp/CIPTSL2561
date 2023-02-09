@@ -8,6 +8,15 @@ const INTERRUP_REG = 0x86
 let ch0= 0;
 let ch1 = 0;
 
+function set_Reg(command: number) {
+    let buf = pins.createBuffer(2);
+    // basic.pause(10)
+    // basic.pause(10)
+    buf[0] = command >> 16
+    buf[1] = command & 0xFF
+    return pins.i2cWriteBuffer(SHT31_DEFAULT_ADDR, buf)
+}
+
 function set_Reg_num(reg: number, dat: number): void {
     let _wbuf = pins.createBuffer(2);
     _wbuf[0] = reg;
@@ -42,12 +51,14 @@ export function init() {
         */
     //% blockId="CIPLUX"
     //% block="Leer LUX"
-export function LUX(): number {
+export function LUX(): Buffer {
     basic.pause(10);
-    let ch00 = get2Reg(CH0_ACCES_LOW);
+    set_Reg(CH0_ACCES_LOW);
+    let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
     //ch00 = ch00*(1 << 8)
     basic.pause(1000);
-    let ch01 = get2Reg(CH0_ACCES_UP);
+    set_Reg(CH0_ACCES_UP);
+    let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
     //ch01 = 1 << 8
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
