@@ -29,7 +29,7 @@ namespace CIPLUX {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    //set_Reg_num(GAIN_ACCES, 0x11)
+    set_Reg_num(GAIN_ACCES, 0x11)
     setReg(CH0_ACCES_LOW);
     basic.pause(10)
     let ch0 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, pins.sizeOf(NumberFormat.UInt16BE) * 7)
