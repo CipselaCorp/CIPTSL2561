@@ -67,7 +67,7 @@ export function LUX(): number {
     result_1 |= ch01[1];
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
-    return result_1
+    return result_1 + result
 }
 
 }
