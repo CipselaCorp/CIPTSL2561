@@ -30,7 +30,7 @@ namespace CIPLUX {
     /**
             * Returns a number describing the LUX intensity
         */
-    //% blockId="CIPLUX"
+    //% blockId="CIPLUXINIT"
     //% block="init"
 export function init() {
         set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
@@ -43,7 +43,6 @@ export function init() {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    
     basic.pause(10);
     let ch00 = get2Reg(CH0_ACCES_LOW);
     //ch00 = ch00*(1 << 8)
