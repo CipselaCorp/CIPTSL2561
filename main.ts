@@ -1,9 +1,10 @@
 let lux = 0
 const TSL2561_I2C_ADRESS = 0x39
 const GAIN_ACCES = 0x81
-const INTEGRATION_TIME = 0X11
-const CH0_ACCES_LOW = 0X8C
-const CH0_ACCES_UP = 0X8D
+const INTEGRATION_TIME = 0x11
+const CH0_ACCES_LOW = 0x8C
+const CH0_ACCES_UP = 0x8D
+const INTERRUP_REG = 0x86
 let ch0= 0;
 let ch1 = 0;
 
@@ -23,10 +24,13 @@ function get2Reg(reg: number): number {
     return pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.Int16BE);
 }
 
-
+function init(){
+    set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
+    set_Reg_num(INTERRUP_REG, 0x10);
+}
 //% color=#9C36B5 weight=25 icon="\uf005" block="CIPLUX2560"
 namespace CIPLUX {
-    
+    init();
 
     /**
             * Returns a number describing the LUX intensity
@@ -34,13 +38,13 @@ namespace CIPLUX {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
+    
     basic.pause(10);
-    let ch00 = get2Reg(0x8E);
-    ch00 = ch00*(1 << 8)
+    let ch00 = get2Reg(CH0_ACCES_LOW);
+    //ch00 = ch00*(1 << 8)
     basic.pause(1000);
-    let ch01 = get2Reg(0X8F);
-    ch01 = 1 << 8
+    let ch01 = get2Reg(CH0_ACCES_UP);
+    //ch01 = 1 << 8
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
     return ch00
