@@ -27,7 +27,9 @@ function get2Reg(reg: number): number {
 
 //% color=#9C36B5 weight=25 icon="\uf005" block="CIPLUX2560"
 namespace CIPLUX {
-
+    /**
+            * Returns a number describing the LUX intensity
+        */
     //% blockId="CIPLUX"
     //% block="init"
     function init() {
