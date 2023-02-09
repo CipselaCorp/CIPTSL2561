@@ -32,7 +32,7 @@ namespace CIPLUX {
         */
     //% blockId="CIPLUX"
     //% block="init"
-    function init() {
+export function init() {
         set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
         set_Reg_num(INTERRUP_REG, 0x10);
     }
