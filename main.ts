@@ -7,7 +7,7 @@ let CH0_ACCES_UP = 0X8D
 
 function set_Reg_num(reg: number, dat: number): void {
     let _wbuf = pins.createBuffer(2);
-    _wbuf[0] = reg | 0x11;
+    _wbuf[0] = reg | 0xff;
     _wbuf[1] = dat;
     pins.i2cWriteBuffer(TSL2561_I2C_ADRESS, _wbuf);
 }
@@ -16,8 +16,8 @@ function getReg(reg: number): number {
     return pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt8BE);
 }
 function init (){
-    let t = getReg(INTEGRATION_TIME)
-    //t &= 0x11
+    let t = getReg(GAIN_ACCES)
+    t &= 0x11
     set_Reg_num(GAIN_ACCES, t)
 }
 function set_Reg(command: number): number {
