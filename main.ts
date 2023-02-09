@@ -40,7 +40,7 @@ export function LUX(): number {
     ch00 = 1 << 8
     basic.pause(1000);
     let ch01 = get2Reg(CH0_ACCES_UP);
-    ch01 = 1 >> 8
+    ch01 = 1 << 8
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
     return ch01
