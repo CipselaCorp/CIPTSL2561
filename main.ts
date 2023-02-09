@@ -24,13 +24,16 @@ function get2Reg(reg: number): number {
     return pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.Int16BE);
 }
 
-function init(){
-    set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
-    set_Reg_num(INTERRUP_REG, 0x10);
-}
+
 //% color=#9C36B5 weight=25 icon="\uf005" block="CIPLUX2560"
 namespace CIPLUX {
-    init();
+
+    //% blockId="CIPLUX"
+    //% block="init"
+    function init() {
+        set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
+        set_Reg_num(INTERRUP_REG, 0x10);
+    }
 
     /**
             * Returns a number describing the LUX intensity
