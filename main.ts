@@ -26,20 +26,19 @@ function get2Reg(reg: number): number {
 
 //% color=#9C36B5 weight=25 icon="\uf005" block="CIPLUX2560"
 namespace CIPLUX {
-    set_Reg_num(GAIN_ACCES, 0x11);
-    basic.pause(10)
+    
+
     /**
             * Returns a number describing the LUX intensity
         */
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-   
-    
-    let ch00 = get2Reg(CH0_ACCES_LOW)
-    basic.pause(1000)
-    
-    let ch01 = get2Reg(CH0_ACCES_UP)
+    set_Reg_num(GAIN_ACCES, 0x11);
+    basic.pause(10);
+    let ch00 = get2Reg(CH0_ACCES_LOW);
+    basic.pause(1000);
+    let ch01 = get2Reg(CH0_ACCES_UP);
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
     return ch00 + ch01
