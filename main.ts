@@ -13,7 +13,7 @@ function set_Reg(command: number) {
     // basic.pause(10)
     // basic.pause(10)
     buf[0] = command >> 16
-    buf[1] = command & 0xFF
+    buf[1] = command
     return pins.i2cWriteBuffer(SHT31_DEFAULT_ADDR, buf)
 }
 
