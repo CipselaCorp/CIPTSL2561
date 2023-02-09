@@ -43,7 +43,7 @@ namespace CIPLUX {
     //% block="init"
 export function init() {
     let t = getReg(GAIN_ACCES)
-    t |= 1 >> 8
+    t |= 0x11
     set_Reg_num(GAIN_ACCES, t);
     basic.showNumber(t)
     }
