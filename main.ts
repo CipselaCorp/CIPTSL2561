@@ -7,7 +7,7 @@ let CH0_ACCES_UP = 0X8D
 
 function set_Reg_num(reg: number, dat: number): void {
     let _wbuf = pins.createBuffer(2);
-    _wbuf[0] = reg;
+    _wbuf[0] = reg | 0x0A;
     _wbuf[1] = dat;
     pins.i2cWriteBuffer(TSL2561_I2C_ADRESS, _wbuf);
 }
@@ -23,10 +23,8 @@ function get2Reg(reg: number): number {
 
 function set_Reg(command: number): number {
     let buf = pins.createBuffer(2);
-    // basic.pause(10)
-    // basic.pause(10)
     buf[0] = command >> 16
-    buf[1] = command & 0xff
+    buf[1] = command & 0xffff
     return pins.i2cWriteBuffer(TSL2561_I2C_ADRESS, buf)
 }
 
@@ -41,16 +39,20 @@ namespace CIPLUX {
 export function LUX(): number {
     set_Reg_num(GAIN_ACCES, 0x11);
     basic.pause(10)
-    let ch0 = get2Reg(CH0_ACCES_LOW);
+    set_Reg(CH0_ACCES_LOW)
+    let ch0 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS,pins.sizeOf(NumberFormat.UInt16LE) * 15)
+    let result = ch0[0] << 16;
+    result |= ch0[1];
     basic.pause(1000)
-    //set_Reg(CH0_ACCES_UP)
+    set_Reg(CH0_ACCES_UP)
     basic.pause(10)
-    let ch1 = get2Reg(CH0_ACCES_UP);
-    
+    let ch1 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, pins.sizeOf(NumberFormat.UInt16LE) * 15)
+    let result_1 = ch1[0] << 16;
+    result_1 |= ch1[1];
     basic.pause(100)
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
-    lux = 256*(ch0+ ch1)
-    return ch1
+    //lux = 256*(ch0+ ch1)
+    return result + result_1
 }
 
 }
