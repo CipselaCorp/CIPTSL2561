@@ -15,6 +15,12 @@ function getReg(reg: number): number {
     pins.i2cWriteNumber(TSL2561_I2C_ADRESS, reg, NumberFormat.UInt8BE);
     return pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt8BE);
 }
+
+function get2Reg(reg: number): number {
+    pins.i2cWriteNumber(TSL2561_I2C_ADRESS, reg, NumberFormat.UInt16BE);
+    return pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE);
+}
+
 function init (){
     let t = getReg(GAIN_ACCES)
     t &= 0x11
@@ -41,7 +47,7 @@ export function LUX(): number {
     init()
     //set_Reg_num(GAIN_ACCES, 0x11);
     basic.pause(10)
-    let ch0 = getReg(CH0_ACCES_LOW);
+    let ch0 = get2Reg(CH0_ACCES_LOW);
     basic.pause(1000)
     set_Reg(CH0_ACCES_UP)
     basic.pause(10)
