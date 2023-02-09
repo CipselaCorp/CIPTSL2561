@@ -21,11 +21,6 @@ function get2Reg(reg: number): number {
     return pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE);
 }
 
-function init (){
-    let t = getReg(GAIN_ACCES)
-    t |= 0x11
-    set_Reg_num(GAIN_ACCES, t)
-}
 function set_Reg(command: number): number {
     let buf = pins.createBuffer(2);
     // basic.pause(10)
@@ -44,8 +39,7 @@ namespace CIPLUX {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    init()
-    //set_Reg_num(GAIN_ACCES, 0x11);
+    set_Reg_num(GAIN_ACCES, 0x11);
     basic.pause(10)
     let ch0 = get2Reg(CH0_ACCES_LOW);
     basic.pause(1000)
