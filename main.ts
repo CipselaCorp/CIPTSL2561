@@ -51,18 +51,22 @@ export function init() {
         */
     //% blockId="CIPLUX"
     //% block="Leer LUX"
-export function LUX(): Buffer {
+export function LUX(): number {
     basic.pause(10);
     set_Reg(CH0_ACCES_LOW);
     let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
+    let result = ch00[0] << 16;
+    result |= ch00[1];
     //ch00 = ch00*(1 << 8)
+
+    
     basic.pause(1000);
     set_Reg(CH0_ACCES_UP);
     let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE)
     //ch01 = 1 << 8
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
     //lux = 256*(ch0+ ch1)
-    return ch00
+    return result
 }
 
 }
