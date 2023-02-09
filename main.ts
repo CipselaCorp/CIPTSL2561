@@ -38,14 +38,10 @@ namespace CIPLUX {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    //init()
-    set_Reg_num(GAIN_ACCES, 0x11);
+    init()
+    //set_Reg_num(GAIN_ACCES, 0x11);
     basic.pause(10)
-    setReg(CH0_ACCES_LOW);
-    basic.pause(10)
-    let ch0 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, pins.sizeOf(NumberFormat.UInt16BE) * 7)
-    let result_1 = ch0[0] << 8;
-    result_1 |= ch0[1];
+    let ch0 = getReg(CH0_ACCES_LOW);
     basic.pause(1000)
     set_Reg(CH0_ACCES_UP)
     basic.pause(10)
@@ -54,8 +50,8 @@ export function LUX(): number {
     result_2 |= ch1[1];
     basic.pause(100)
     //let data = pins.i2cReadNumber(TSL2561_I2C_ADRESS, NumberFormat.UInt16BE, false)
-    lux = 256*(result_1 + result_2)
-    return lux
+    lux = 256*(ch0+ result_2)
+    return ch0
 }
 
 }
