@@ -49,6 +49,18 @@ export function init() {
     }
 
     /**
+                * Returns a number describing the LUX intensity
+            */
+    //% blockId="CIPLUXint"
+    //% block="int"
+export function int() {
+    let t = getReg(INTERRUP_REG)
+    t &= 0x10
+    set_Reg_num(INTERRUP_REG, t);
+    basic.showNumber(t)
+}
+
+    /**
             * Returns a number describing the LUX intensity
         */
     //% blockId="CIPLUX"
