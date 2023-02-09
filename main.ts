@@ -1,7 +1,7 @@
 let lux = 0
 const TSL2561_I2C_ADRESS = 0x39
 const GAIN_ACCES = 0x81
-const INTEGRATION_TIME = 0x11
+const INTEGRATION_TIME = 0x02
 const CH0_ACCES_LOW = 0x8C
 const CH0_ACCES_UP = 0x8D
 const INTERRUP_REG = 0x86
@@ -43,6 +43,7 @@ namespace CIPLUX {
     //% block="init"
 export function init() {
         set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
+        basic.pause(10)
         set_Reg_num(INTERRUP_REG, 0x10);
     }
 
