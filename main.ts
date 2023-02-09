@@ -68,15 +68,15 @@ export function int() {
 export function LUX(): number {
     set_Reg_num(INTERRUP_REG, 0x10);
     //basic.pause(10);
-    set_Reg(CH0_ACCES_LOW);
+    set_Reg(0x82);
     let ch00 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
     let result = ch00[0] << 8;
     result |= ch00[1];
     //ch00 = ch00*(1 << 8)
-    
+    basic.pause(50)
     //set_Reg_num(INTERRUP_REG, 0x10);
     //basic.pause(1000);
-    set_Reg(CH0_ACCES_UP);
+    set_Reg(0x83);
     let ch01 = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, NumberFormat.UInt16LE)
     let result_1 = ch01[0] << 8;
     result_1 |= ch01[1];
