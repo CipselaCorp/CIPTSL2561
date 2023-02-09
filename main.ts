@@ -7,7 +7,7 @@ let CH0_ACCES_UP = 0X8D
 
 function set_Reg_num(reg: number, dat: number): void {
     let _wbuf = pins.createBuffer(2);
-    _wbuf[0] = reg;
+    _wbuf[0] = reg | 0XFF;
     _wbuf[1] = dat;
     pins.i2cWriteBuffer(TSL2561_I2C_ADRESS, _wbuf);
 }
@@ -49,7 +49,7 @@ export function LUX(): number {
     basic.pause(10)
     let ch0 = get2Reg(CH0_ACCES_LOW);
     basic.pause(1000)
-    set_Reg(CH0_ACCES_UP)
+    //set_Reg(CH0_ACCES_UP)
     basic.pause(10)
     let ch1 = get2Reg(CH0_ACCES_UP);
     
