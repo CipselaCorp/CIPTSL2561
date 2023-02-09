@@ -42,10 +42,10 @@ namespace CIPLUX {
     //% blockId="CIPLUXINIT"
     //% block="init"
 export function init() {
-    set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
-    let bf = pins.i2cReadBuffer(TSL2561_I2C_ADRESS , NumberFormat.UInt8LE)
-    let res = bf[0] | 1
-    basic.showNumber(res);    
+    let t = getReg(GAIN_ACCES)
+    t |= 4
+    set_Reg_num(GAIN_ACCES, t);
+    basic.showNumber(t)
     }
 
     /**
