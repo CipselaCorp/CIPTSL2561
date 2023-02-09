@@ -7,7 +7,7 @@ let CH0_ACCES_UP = 0X8D
 
 function set_Reg_num(reg: number, dat: number): void {
     let _wbuf = pins.createBuffer(2);
-    _wbuf[0] = reg | 0xff;
+    _wbuf[0] = reg | 0x11;
     _wbuf[1] = dat;
     pins.i2cWriteBuffer(TSL2561_I2C_ADRESS, _wbuf);
 }
@@ -18,7 +18,7 @@ function getReg(reg: number): number {
 function init (){
     let t = getReg(INTEGRATION_TIME)
     //t &= 0x11
-    set_Reg_num(GAIN_ACCES, 0x11)
+    set_Reg_num(GAIN_ACCES, t)
 }
 function set_Reg(command: number): number {
     let buf = pins.createBuffer(2);
@@ -38,8 +38,8 @@ namespace CIPLUX {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    
-    set_Reg_num(GAIN_ACCES, 0x11);
+    init()
+    //set_Reg_num(GAIN_ACCES, 0x11);
     basic.pause(10)
     setReg(CH0_ACCES_LOW);
     basic.pause(10)
