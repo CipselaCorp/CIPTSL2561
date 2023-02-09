@@ -44,8 +44,7 @@ namespace CIPLUX {
 export function init() {
     set_Reg_num(GAIN_ACCES, INTEGRATION_TIME);
     let bf = pins.i2cReadBuffer(TSL2561_I2C_ADRESS , NumberFormat.UInt8LE)
-    let res = bf[0] << 8 | bf[1];
-    res |= 4
+    let res = bf[0] | 4
     basic.showNumber(res);    
     }
 
