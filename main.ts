@@ -96,11 +96,13 @@ export function interrup() {
         set_Reg_num(GAIN_ACCES, INTEGRATION_TIME )
         basic.pause(6)
         let DW = get2Reg(CH0_ACCES_LOW)
-        
-        basic.pause(6)
         let UP = get2Reg(CH0_ACCES_UP)
+        let DW1 = get2Reg(CH1_ACCES_LOW)
+        let UP1 = get2Reg(CH1_ACCES_UP)
+        let result0 = 256 * UP + DW
+        let result1 = 256 * UP1 + DW1
 
-        return UP + DW
+        return result1 - result0
         
     }
 
