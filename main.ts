@@ -69,13 +69,13 @@ export function interrup() {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    pins.i2cWriteNumber(TSL2561_I2C_ADRESS, CH0_ACCES_LOW | CH0_ACCES_UP, NumberFormat.UInt16LE)
+    pins.i2cWriteNumber(TSL2561_I2C_ADRESS, CH0_ACCES_LOW | CH0_ACCES_UP, NumberFormat.UInt16BE)
     basic.pause(100);
     let buff = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, 6);
     let result = buff[0] << 8;
     result |= buff[1];
 
-    pins.i2cWriteNumber(TSL2561_I2C_ADRESS, CH1_ACCES_LOW | CH1_ACCES_UP, NumberFormat.UInt16LE)
+    pins.i2cWriteNumber(TSL2561_I2C_ADRESS, CH1_ACCES_LOW | CH1_ACCES_UP, NumberFormat.UInt16BE)
     basic.pause(100);
     let buf = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, 6);
     let result_1 = buf[0] << 8;
