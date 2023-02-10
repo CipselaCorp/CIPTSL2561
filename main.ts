@@ -72,7 +72,7 @@ export function LUX(): number {
     pins.i2cWriteNumber(TSL2561_I2C_ADRESS, CH0_ACCES_LOW, NumberFormat.UInt16LE)
     basic.pause(100);
     let buff = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, 2);
-    let result = buff[0] << 16;
+    let result = buff[0] << 8;
     result |= buff[1];
     return result
     //set_Reg_num(INTERRUP_REG, 0x10);
