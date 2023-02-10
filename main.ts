@@ -46,7 +46,7 @@ namespace CIPLUX {
     //% block="init"
 export function init() {
     let t = getReg(GAIN_ACCES)
-    t &= 0x10
+    t &= 0x11
     set_Reg_num(GAIN_ACCES, t);
     basic.showNumber(t)
     }
@@ -69,10 +69,10 @@ export function interrup() {
     //% blockId="CIPLUX"
     //% block="Leer LUX"
 export function LUX(): number {
-    pins.i2cWriteNumber(TSL2561_I2C_ADRESS, CH0_ACCES_LOW, NumberFormat.UInt8LE)
+    pins.i2cWriteNumber(TSL2561_I2C_ADRESS, CH0_ACCES_LOW, NumberFormat.UInt16LE)
     basic.pause(100);
     let buff = pins.i2cReadBuffer(TSL2561_I2C_ADRESS, 3);
-    let result = buff[0] << 8;
+    let result = buff[0] << 16;
     result |= buff[1];
     return result
     //set_Reg_num(INTERRUP_REG, 0x10);
